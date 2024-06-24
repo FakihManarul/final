@@ -1,0 +1,182 @@
+{% include 'header.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dashboard-admin</title>
+
+    <style>
+      /* General styles */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      .main {
+        padding: 20px;
+        position: relative;
+      }
+
+      /* Banner styles */
+      .banner {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+        margin-bottom: 30px;
+      }
+
+      .slides {
+        display: flex;
+        width: 300%;
+        height: 100%;
+        transition: transform 1s ease-in-out;
+      }
+
+      .slide {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+      }
+
+      /* Card container styles */
+      .cards-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        width: 100%; /* Ensure cards fit within the grid */
+        box-sizing: border-box;
+      }
+
+      .card img {
+        max-width: 100%;
+        border-radius: 8px;
+      }
+
+      .card h2 {
+        margin-top: 10px;
+      }
+
+      .card p {
+        margin: 10px 0 0;
+      }
+
+      /* Responsive styles */
+      @media (max-width: 1200px) {
+        .cards-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .cards-container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main id="main" class="main">
+      <!-- Banner Section -->
+      <section class="banner">
+        <div class="slides">
+          <div
+            class="slide"
+            id="slide1"
+            style="background-image: url('/static/banner1.jpg')"
+          ></div>
+          <div
+            class="slide"
+            id="slide2"
+            style="background-image: url('/static/banner4.jpg')"
+          ></div>
+          <div
+            class="slide"
+            id="slide3"
+            style="background-image: url('/static/banner6.jpg')"
+          ></div>
+        </div>
+      </section>
+      <!-- End Banner Section -->
+
+      <!-- Card Section -->
+      <div class="cards-container">
+        <a href="/">
+          <div class="card">
+            <img src="/static/mlbb.jpg" alt="Card Image 1" />
+            <h2>Diamond Fast</h2>
+            <p>Top Up untuk Diamond Fast</p>
+          </div>
+        </a>
+        <a href="/">
+          <div class="card">
+            <img src="/static/mlbb.jpg" alt="Card Image 2" />
+            <h2>Diamond Slow</h2>
+            <p>Top Up untuk Diamond Slow</p>
+          </div>
+        </a>
+        <a href="/">
+          <div class="card">
+            <img src="/static/mlbb.jpg" alt="Card Image 3" />
+            <h2>Weekly Diamond</h2>
+            <p>Top Up untuk Weekly Diamond</p>
+          </div>
+        </a>
+        <a href="/">
+          <div class="card">
+            <img src="/static/mlbb.jpg" alt="Card Image 4" />
+            <h2>Paket Starlight</h2>
+            <p>Top Up untuk Paket Starlight</p>
+          </div>
+        </a>
+      </div>
+      <!-- End Card Section -->
+    </main>
+    <!-- End #main -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const slides = document.querySelectorAll(".slide");
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+          const bannerWidth = document.querySelector(".banner").offsetWidth;
+          const offset = -index * bannerWidth;
+          document.querySelector(
+            ".slides"
+          ).style.transform = `translateX(${offset}px)`;
+        }
+
+        function nextSlide() {
+          currentSlide = (currentSlide + 1) % totalSlides;
+          showSlide(currentSlide);
+        }
+
+        setInterval(nextSlide, 3000); // Ubah slide setiap 3 detik
+
+        showSlide(currentSlide); // Inisialisasi slide pertama
+
+        window.addEventListener("resize", () => showSlide(currentSlide)); // Pastikan posisi slide saat ukuran jendela berubah
+      });
+    </script>
+  </body>
+</html>
+
+{% include 'footer.html' %}
